@@ -1,5 +1,7 @@
 package com.liumapp.KeyGeneratorHelper.service;
 
+import com.liumapp.KeyGeneratorHelper.certificates.Resource;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyStore;
@@ -17,6 +19,14 @@ public class KeyTools {
     public static KeyStoreAdapter newKeyStore(String password) throws KeyStoreException {
         try {
             return createKeyStoreAdapter(null, password);
+        } catch (IOException | NoSuchAlgorithmException | CertificateException e) {
+            throw new KeyStoreException(e);
+        }
+    }
+
+    public static KeyStoreAdapter keyStoreFrom(Resource resource, String password) throws KeyStoreException {
+        try (InputStream ksStream = resource.getInputStream()) {
+            return createKeyStoreAdapter(ksStream, password);
         } catch (IOException | NoSuchAlgorithmException | CertificateException e) {
             throw new KeyStoreException(e);
         }
