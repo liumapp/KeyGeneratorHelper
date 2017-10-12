@@ -1,5 +1,8 @@
 package com.liumapp.KeyGeneratorHelper.service;
 
+import com.liumapp.KeyGeneratorHelper.certificates.CSR;
+import com.liumapp.KeyGeneratorHelper.certificates.P7B;
+import com.liumapp.KeyGeneratorHelper.utils.Preconditions;
 import sun.security.pkcs10.PKCS10;
 import sun.security.x509.X500Name;
 
@@ -58,7 +61,6 @@ public class KeyStoreAdapter {
                 CertificateException |
                 IOException |
                 SignatureException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
             throw new KeyStoreException(e);
         }
     }
@@ -82,7 +84,6 @@ public class KeyStoreAdapter {
                 x509TrustManager.checkClientTrusted(this.getCertificates(alias), "RSA");
             }
         } catch (NoSuchAlgorithmException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
             throw new KeyStoreException(e);
         }
     }
@@ -99,7 +100,6 @@ public class KeyStoreAdapter {
             Key key = this.keyStore.getKey(alias, password.toCharArray());
             return key != null ? Optional.of(new KeyPair(certificate.getPublicKey(), (PrivateKey) key)) : Optional.empty();
         } catch (NoSuchAlgorithmException | UnrecoverableKeyException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
             throw new KeyStoreException(e);
         }
     }
@@ -123,7 +123,6 @@ public class KeyStoreAdapter {
             keyStore.store(outputStream, password.toCharArray());
             return keyStore;
         } catch (IOException | NoSuchAlgorithmException | CertificateException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
             throw new KeyStoreException(e);
         }
     }
