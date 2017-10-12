@@ -16,7 +16,6 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Optional;
-import java.util.logging.Level;
 import java.util.stream.Stream;
 
 /**

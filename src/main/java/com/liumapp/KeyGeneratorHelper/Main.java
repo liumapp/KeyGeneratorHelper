@@ -1,5 +1,6 @@
 package com.liumapp.KeyGeneratorHelper;
 
+import com.liumapp.KeyGeneratorHelper.pattern.KeyPattern;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,9 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 public class Main {
 
-
+    @Bean
+    public KeyPattern keyPattern() {
+        return new KeyPattern();
+    }
 
 }
